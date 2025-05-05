@@ -1,0 +1,405 @@
+{
+  "_parameters": {
+    "market_id": "129",
+    "market_category": null,
+    "sport": "NBA",
+    "event_id": "26432",
+    "season": null,
+    "player_id": null,
+    "opponent_id": null,
+    "team_id": null,
+    "location": "MA",
+    "player_slug": null,
+    "picks": "false",
+    "condense": "false",
+    "book_id": null,
+    "live": "true",
+    "popularity": "false",
+    "skip_metrics": "false"
+  },
+  "_pagination": {
+    "page": 1,
+    "limit": 5,
+    "total_pages": 1,
+    "total_items": 1,
+    "paginated_array": "offers",
+    "self": "/v3/offers?event_id=26432&limit=5&live=true&location=MA&market_id=129&page=1&sport=NBA"
+  },
+  "markets": [
+    129
+  ],
+  "offers": [
+    {
+      "id": "e7bfabc4-8d7d-4f1a-847d-bd747c423ef0",
+      "market_id": 129,
+      "event_id": 26432,
+      "player_id": null,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "GSW",
+          "name": "Warriors",
+          "link": "/nba/teams/golden-state-warriors/",
+          "team": {
+            "city": "Golden State",
+            "abbreviation": "GSW",
+            "conference": "Western",
+            "division": "Pacific",
+            "slug": "golden-state-warriors"
+          }
+        },
+        {
+          "id": "HOU",
+          "name": "Rockets",
+          "link": "/nba/teams/houston-rockets/",
+          "team": {
+            "city": "Houston",
+            "abbreviation": "HOU",
+            "conference": "Western",
+            "division": "Southwest",
+            "slug": "houston-rockets"
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": "GSW",
+          "selection": "",
+          "active": true,
+          "opening_line": {
+            "line": -5,
+            "cost": -112,
+            "book_id": 10,
+            "created": "2025-05-01 02:13:41"
+          },
+          "label": "Warriors",
+          "short_label": "GSW",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": 0.013308064587729318,
+                    "bet_rating": 3,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "cdeee926-f964-492d-9b83-f3161249c85a",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.501508018&selectionId=237493",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": 0.013308064587729318,
+                    "bet_rating": 3,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "bf41ce94-fc43-4b55-8628-71fc778255c3",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32233068?outcomes=0HC79762804N550_1",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": 0.013308064587729318,
+                    "bet_rating": 3,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "510b24bd-1830-47ff-a1f8-e97a25c8f590",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -107,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/b26310c6-8869-404b-85ad-05914cb93b61/section/lines?market_selection_id[0]=2c6b441f-571f-4427-b256-63097ffda4ad&odds_numerator[0]=207&odds_denominator[0]=107",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": 0.026836877199047482,
+                    "bet_rating": 3,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "b0192e12-a453-4e6e-aebe-e30f0a76fbd2",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -115,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404125-1293397064--622781384&stake=0",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": -0.007671398447213318,
+                    "bet_rating": 2,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "9dc5cd11-0cc0-4483-b71b-dc510dfbc277",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": -5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=5227a678-b435-3720-b1d9-d38dabfe6686",
+                  "metrics": {
+                    "projection": -6.7,
+                    "cover_probability": 0.5307804147840487,
+                    "expected_value": 0.013308064587729318,
+                    "bet_rating": 3,
+                    "result": "loss",
+                    "notes": null
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "a01a3669-3731-4a1b-92ed-a8bc1109f185"
+        },
+        {
+          "participant": "HOU",
+          "selection": "",
+          "active": true,
+          "opening_line": {
+            "line": 5,
+            "cost": -108,
+            "book_id": 10,
+            "created": "2025-05-01 02:13:41"
+          },
+          "label": "Rockets",
+          "short_label": "HOU",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.10421715549682026,
+                    "bet_rating": 1,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "94094ba9-7089-474c-aefe-16fa00018b4e",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.501508018&selectionId=237488",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.10421715549682026,
+                    "bet_rating": 1,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "fabb5a4d-e4d0-4926-ab14-0cf76a7f2785",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32233068?outcomes=0HC79762804P550_3",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.10421715549682026,
+                    "bet_rating": 1,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "7ca0a358-06fd-4afd-ad6b-88b2b2e38fa9",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -107,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/b26310c6-8869-404b-85ad-05914cb93b61/section/lines?market_selection_id[0]=dc44b04a-2849-4eee-8b07-e9d10393c976&odds_numerator[0]=207&odds_denominator[0]=107",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.09225743794671104,
+                    "bet_rating": 2,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "c1225617-eaf6-48da-9319-2ac1e9ca61de",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -105,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404125-1293397064--622781385&stake=0",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.08390461934028559,
+                    "bet_rating": 2,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "590ca84f-9c35-4b8e-8e5d-f7595fe25478",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 01:02:19",
+                  "cost": -110,
+                  "line": 5.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=b3e06d4a-3f3f-30e6-99b0-e8846a2a1661",
+                  "metrics": {
+                    "projection": 6.7,
+                    "cover_probability": 0.4692195852159513,
+                    "expected_value": -0.10421715549682026,
+                    "bet_rating": 1,
+                    "result": "no recommendation",
+                    "notes": null
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "c1f1fda7-be41-4b1f-88a5-33f595c6cf68"
+        }
+      ]
+    }
+  ],
+  "ts": 1746292014,
+  "utc": "2025-05-03 17:06:54"
+}

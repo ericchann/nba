@@ -1,0 +1,1303 @@
+{
+  "_parameters": {
+    "market_id": [
+      136,
+      142,
+      147,
+      151,
+      152,
+      156,
+      157,
+      160,
+      162,
+      335,
+      336,
+      337,
+      338
+    ],
+    "market_category": null,
+    "sport": "NBA",
+    "event_id": "26434",
+    "season": null,
+    "player_id": "2332",
+    "opponent_id": null,
+    "team_id": null,
+    "location": "MA",
+    "player_slug": "james-harden",
+    "picks": "false",
+    "condense": "false",
+    "book_id": null,
+    "live": "false",
+    "popularity": "false",
+    "skip_metrics": "false"
+  },
+  "_pagination": {
+    "page": 1,
+    "limit": 5,
+    "total_pages": 3,
+    "total_items": 13,
+    "paginated_array": "offers",
+    "self": "/v3/offers?event_id=26434&limit=5&location=MA&market_id=156:157:151:162:147:160:152:142:136:335:336:337:338&page=1&player_slug=james-harden&sport=NBA",
+    "next": "/v3/offers?event_id=26434&limit=5&location=MA&market_id=156%3A157%3A151%3A162%3A147%3A160%3A152%3A142%3A136%3A335%3A336%3A337%3A338&page=2&player_slug=james-harden&sport=NBA"
+  },
+  "markets": [
+    152,
+    147,
+    335,
+    156,
+    336,
+    338,
+    142,
+    162,
+    337,
+    151,
+    157,
+    160,
+    136
+  ],
+  "offers": [
+    {
+      "id": "053da18c-ef34-405d-82dc-b63e3a1d0397",
+      "market_id": 152,
+      "event_id": 26434,
+      "player_id": 2332,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "2332",
+          "name": "James Harden",
+          "link": "/nba/props/james-harden/",
+          "player": {
+            "short_name": "J. Harden",
+            "first_name": "James",
+            "last_name": "Harden",
+            "image": "https://images.fantasypros.com/images/players/nba/2332/headshot/210x210.webp",
+            "position": "G",
+            "team": "LAC",
+            "slug": "james-harden",
+            "jersey_number": 1
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": null,
+          "selection": "over",
+          "active": true,
+          "opening_line": {
+            "line": 0.5,
+            "cost": -165,
+            "book_id": 19,
+            "created": "2025-05-02 08:15:37"
+          },
+          "label": "Over",
+          "short_label": "Over",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:58:11",
+                  "cost": -155,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "8a39176f-06b2-4144-95eb-6859d9144703",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:58:11",
+                  "cost": -145,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247755856%23228621135_13L42648Q1558907120Q20"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "401ca011-3ac7-4feb-b069-600655ba05ae",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:53:24",
+                  "cost": -155,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1293992021--621255926&stake=0"
+                }
+              ]
+            }
+          ],
+          "id": "1ca71d6e-19bf-4851-bb0a-352218cfa05e"
+        },
+        {
+          "participant": null,
+          "selection": "under",
+          "active": true,
+          "opening_line": {
+            "line": 0.5,
+            "cost": 120,
+            "book_id": 19,
+            "created": "2025-05-02 08:15:37"
+          },
+          "label": "Under",
+          "short_label": "Under",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:59:43",
+                  "cost": 114,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "f879eef2-b4de-45cf-94d4-6c855e1fdff4",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:58:11",
+                  "cost": 114,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247755856%23228621154_15L42648Q1846831995Q20"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "62cde46d-5f84-4a11-81bd-0b39892fe477",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:59:43",
+                  "cost": 110,
+                  "line": 0.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1293992021--621255925&stake=0"
+                }
+              ]
+            }
+          ],
+          "id": "49c59b29-a739-4704-887e-03fa4a43930f"
+        }
+      ]
+    },
+    {
+      "id": "0a2e6a04-c402-4dcc-b8f9-33e0c3aadb3a",
+      "market_id": 147,
+      "event_id": 26434,
+      "player_id": null,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "2332",
+          "name": "James Harden",
+          "link": "/nba/props/james-harden/",
+          "player": {
+            "short_name": "J. Harden",
+            "first_name": "James",
+            "last_name": "Harden",
+            "image": "https://images.fantasypros.com/images/players/nba/2332/headshot/210x210.webp",
+            "position": "G",
+            "team": "LAC",
+            "slug": "james-harden",
+            "jersey_number": 1
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": "2332",
+          "selection": "",
+          "active": true,
+          "opening_line": {
+            "line": 1,
+            "cost": 600,
+            "book_id": 12,
+            "created": "2025-05-02 19:08:29"
+          },
+          "label": "James Harden",
+          "short_label": "J. Harden",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:51:54",
+                  "cost": 650,
+                  "line": 1,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "11986a48-6768-4691-9358-0c5358fb0861",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:51:54",
+                  "cost": 650,
+                  "line": 1,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247756331%23228622160_13L42648Q11042620365Q20"
+                }
+              ]
+            }
+          ],
+          "id": "dfc384f6-786b-4069-af0f-60a7b414c840"
+        }
+      ]
+    },
+    {
+      "id": "1f30d0f3-7593-4019-9cbf-b65ded395294",
+      "market_id": 335,
+      "event_id": 26434,
+      "player_id": 2332,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "2332",
+          "name": "James Harden",
+          "link": "/nba/props/james-harden/",
+          "player": {
+            "short_name": "J. Harden",
+            "first_name": "James",
+            "last_name": "Harden",
+            "image": "https://images.fantasypros.com/images/players/nba/2332/headshot/210x210.webp",
+            "position": "G",
+            "team": "LAC",
+            "slug": "james-harden",
+            "jersey_number": 1
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": null,
+          "selection": "over",
+          "active": true,
+          "opening_line": {
+            "line": 29.5,
+            "cost": -118,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Over",
+          "short_label": "Over",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -110,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "97f2770d-9482-4f59-98b7-6edbd464ab69",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -104,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076561&selectionId=12260579"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "93a093e6-5563-4cd1-a991-1769390bcb45",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:51:53",
+                  "cost": -110,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247756066%23228646593_13L42648Q1-1394854437Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "a191d097-073a-4992-b34d-4c4d9e4867d5",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:05:17",
+                  "cost": -137,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "53912bc2-6482-439b-bc5f-83f7ded2b2fd",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:53:26",
+                  "cost": -120,
+                  "line": 29.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294195466--620717065&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "8d84e318-1213-4639-8fe2-2b04768998bd",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:55:00",
+                  "cost": -125,
+                  "line": 29.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=0dbfe54b-5b75-46d2-9067-d0d676e2129b&odds_numerator[0]=9&odds_denominator[0]=5"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "c973f7ca-4bfe-4553-b7fe-ca3475db767a",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:52:21",
+                  "cost": -109,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=33a7ff1e-caf1-35aa-b1d7-7477d0b4deb1"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "dd3cad60-3518-4301-a891-4b3881e97d56",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 18:05:45",
+                  "cost": -115,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "9f7a2153-3b03-452a-b518-c50859ca82af"
+        },
+        {
+          "participant": null,
+          "selection": "under",
+          "active": true,
+          "opening_line": {
+            "line": 29.5,
+            "cost": -112,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Under",
+          "short_label": "Under",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -120,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "ed56d5f0-ba0a-48fa-a4fd-19980029577b",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -128,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076561&selectionId=12260580"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "df4e576b-ac21-469b-852e-e3a4ffe6af9e",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:51:53",
+                  "cost": -120,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247756066%23228646594_15L42648Q1-1180055515Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "97cf9f14-b5ff-402e-939f-010f575627b4",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:05:17",
+                  "cost": -137,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "f5d64ccf-083a-4cf0-8de5-9333272cae4a",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:53:26",
+                  "cost": -110,
+                  "line": 29.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294195466--620717064&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "61adf6e6-e435-4471-98bd-5806f0a99a37",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:55:00",
+                  "cost": -105,
+                  "line": 29.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=746d358d-a3f4-449f-98a1-331b95a070c3&odds_numerator[0]=41&odds_denominator[0]=21"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "a35b95cf-49bf-4973-996b-17d0bc7b69a7",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:52:21",
+                  "cost": -125,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=0d4b0890-cde1-307a-b41f-7f0294a01a01"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "2515813d-6584-4e39-b4e7-d8a44c3846f4",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 18:05:45",
+                  "cost": -115,
+                  "line": 30.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "ba5d6878-a762-443f-9eac-e1aafba1f7ac"
+        }
+      ]
+    },
+    {
+      "id": "2634c3f5-93d5-4fd2-af38-44e7a7d9442d",
+      "market_id": 156,
+      "event_id": 26434,
+      "player_id": 2332,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "2332",
+          "name": "James Harden",
+          "link": "/nba/props/james-harden/",
+          "player": {
+            "short_name": "J. Harden",
+            "first_name": "James",
+            "last_name": "Harden",
+            "image": "https://images.fantasypros.com/images/players/nba/2332/headshot/210x210.webp",
+            "position": "G",
+            "team": "LAC",
+            "slug": "james-harden",
+            "jersey_number": 1
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": null,
+          "selection": "over",
+          "active": true,
+          "opening_line": {
+            "line": 20.5,
+            "cost": -108,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Over",
+          "short_label": "Over",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -125,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "61586a57-a12a-48ce-960e-78b3feadc208",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -130,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076524&selectionId=12260579"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "0ab41a73-386b-4997-be88-00b1f71fbe3e",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:51:53",
+                  "cost": -125,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247755954%23228629702_13L42648Q1490767635Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "fb4f43ba-d1f8-4a41-af0e-384238af3b11",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 14:42:10",
+                  "cost": -137,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "bd47f5ac-d7eb-4ecc-92a0-f17d237841d0",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 10:26:01",
+                  "cost": -120,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294174216--620785620&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "02f00af2-34dd-415f-8ae2-708a94fa9551",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 22:05:01",
+                  "cost": -120,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=224471b5-ca48-457c-8f97-9f02d569a2e8&odds_numerator[0]=11&odds_denominator[0]=6"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "4f0de155-3ded-4d6e-bb2a-39e62b0a9036",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 16:26:47",
+                  "cost": -117,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=554c5447-2c06-3848-ba38-a8cf77304b0d"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "616fcef1-6c21-4461-8cf2-093554a6adcc",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 13:50:24",
+                  "cost": -121,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "9e66cea7-4994-4eb1-a431-e7480d5b7694"
+        },
+        {
+          "participant": null,
+          "selection": "under",
+          "active": true,
+          "opening_line": {
+            "line": 20.5,
+            "cost": -122,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Under",
+          "short_label": "Under",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -110,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "3812df29-c135-4bb1-a49f-39ec2b64fb94",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -102,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076524&selectionId=12260580"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "d5fc3e7b-efbe-4b9f-a44f-69adfbeed275",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:51:53",
+                  "cost": -105,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247755954%23228629703_13L42648Q1175200708Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "c9613aae-bdb7-46d7-8af4-9ca763769688",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 14:42:10",
+                  "cost": -137,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "a7201d5e-ecec-48b0-ba4c-da7d5c84608f",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 22:10:07",
+                  "cost": -110,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294174216--620785619&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "a66001ac-fd32-45dd-82b0-227f4762da4b",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 22:05:01",
+                  "cost": -110,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=4275171d-09c0-4ae9-9ab1-f427d14fd749&odds_numerator[0]=21&odds_denominator[0]=11"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "32af5caa-666d-4342-9f70-edf2d9ae035e",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:26:47",
+                  "cost": -117,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=64b54ddd-fadb-3789-bee5-7aed069c59de"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "378bde52-05e8-4dd0-a481-6644409a041b",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 13:50:24",
+                  "cost": -110,
+                  "line": 20.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "6c340863-a272-411c-8540-c8e513a3037e"
+        }
+      ]
+    },
+    {
+      "id": "27b9f5bc-6e65-485b-aa6b-0cd30f5311cd",
+      "market_id": 336,
+      "event_id": 26434,
+      "player_id": 2332,
+      "team_id": null,
+      "opponent_id": null,
+      "link": "",
+      "active": true,
+      "participants": [
+        {
+          "id": "2332",
+          "name": "James Harden",
+          "link": "/nba/props/james-harden/",
+          "player": {
+            "short_name": "J. Harden",
+            "first_name": "James",
+            "last_name": "Harden",
+            "image": "https://images.fantasypros.com/images/players/nba/2332/headshot/210x210.webp",
+            "position": "G",
+            "team": "LAC",
+            "slug": "james-harden",
+            "jersey_number": 1
+          }
+        }
+      ],
+      "selections": [
+        {
+          "participant": null,
+          "selection": "over",
+          "active": true,
+          "opening_line": {
+            "line": 25.5,
+            "cost": -122,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Over",
+          "short_label": "Over",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:05:07",
+                  "cost": -121,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "147a2272-c11a-4b44-8ab0-27be3566c6b5",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -118,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076568&selectionId=12260579"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "91b11b9e-1fc5-4f72-979c-a034da572c65",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:38",
+                  "cost": -125,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247756126%23228646595_13L42648Q1236455410Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "9f674301-46b5-409d-b963-10b4bb2f0dc6",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 14:42:10",
+                  "cost": -137,
+                  "line": 27,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "0cf69dc9-f0fa-4c41-afb1-bd43a0daad22",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 16:59:44",
+                  "cost": -120,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294174215--620785622&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "649c23cb-f62e-4af1-bbf3-2b04bf2da4cb",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 20:49:15",
+                  "cost": -120,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=eb36e80c-46ea-4242-9c63-aaf5360b9ec2&odds_numerator[0]=11&odds_denominator[0]=6"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "dc2d36ae-b3e7-4878-89f8-5cf5e6949ed3",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:05:07",
+                  "cost": -121,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=97603710-9c66-3fa9-8c67-aae967b6a660"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "bd9eb034-250e-4a70-b3fc-d2da81ae4be3",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 12:54:07",
+                  "cost": -124,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "a924a340-df97-4424-92bc-20ae367fc7cd"
+        },
+        {
+          "participant": null,
+          "selection": "under",
+          "active": true,
+          "opening_line": {
+            "line": 25.5,
+            "cost": -108,
+            "book_id": 10,
+            "created": "2025-05-02 04:42:41"
+          },
+          "label": "Under",
+          "short_label": "Under",
+          "books": [
+            {
+              "id": 0,
+              "lines": [
+                {
+                  "id": null,
+                  "from_scout": false,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:05:07",
+                  "cost": -110,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://www.bettingpros.com"
+                }
+              ]
+            },
+            {
+              "id": 10,
+              "lines": [
+                {
+                  "id": "c32bbf5a-0b16-4cd6-86fa-8811ed84e522",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:04:09",
+                  "cost": -112,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://account.sportsbook.fanduel.com/sportsbook/addToBetslip?marketId=42.502076568&selectionId=12260580"
+                }
+              ]
+            },
+            {
+              "id": 12,
+              "lines": [
+                {
+                  "id": "cf1a5276-f93e-481c-8bb4-0e26371247db",
+                  "from_scout": true,
+                  "main": true,
+                  "best": true,
+                  "updated": "2025-05-03 17:04:38",
+                  "cost": -105,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.draftkings.com/event/32241161?outcomes=0QA247756126%23228646596_15L42648Q1-1089293629Q20"
+                }
+              ]
+            },
+            {
+              "id": 37,
+              "lines": [
+                {
+                  "id": "b1b67ba4-ea3c-40e3-b90b-fec7af605662",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 14:42:10",
+                  "cost": -137,
+                  "line": 27,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/WPDzpO"
+                }
+              ]
+            },
+            {
+              "id": 19,
+              "lines": [
+                {
+                  "id": "d34f9b6d-b106-4673-827c-333d26e74aae",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 14:59:40",
+                  "cost": -110,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sports.MA.betmgm.com/en/sports?wm=7133260&options=17404150-1294174215--620785621&stake=0"
+                }
+              ]
+            },
+            {
+              "id": 33,
+              "lines": [
+                {
+                  "id": "dbfc2796-c2c3-4924-9ec8-8762b3eb4cd8",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-02 20:49:15",
+                  "cost": -110,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://espnbet.com/sport/basketball/organization/united-states/competition/nba/event/00a139c5-bf9a-4d85-ab03-5f322159c527/section/lines?market_selection_id[0]=d341bff5-3e42-4f07-a011-04d3a102a27f&odds_numerator[0]=21&odds_denominator[0]=11"
+                }
+              ]
+            },
+            {
+              "id": 13,
+              "lines": [
+                {
+                  "id": "d42c3c50-2cea-4770-8f60-ea9cff1ce009",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 17:05:07",
+                  "cost": -113,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://sportsbook.caesars.com/us/ma/bet/betslip?selectionIds=cfa3f3e7-e3c3-3c6c-b309-525df826ed5a"
+                }
+              ]
+            },
+            {
+              "id": 36,
+              "lines": [
+                {
+                  "id": "99ba1709-2165-493f-8f31-d5103e24f040",
+                  "from_scout": true,
+                  "main": true,
+                  "best": false,
+                  "updated": "2025-05-03 12:54:07",
+                  "cost": -108,
+                  "line": 26.5,
+                  "is_off": false,
+                  "active": true,
+                  "link": "https://btng.pro/GJDieR"
+                }
+              ]
+            }
+          ],
+          "id": "e8636bed-f39a-48da-8e0d-f1580d2605f2"
+        }
+      ]
+    }
+  ],
+  "ts": 1746291928,
+  "utc": "2025-05-03 17:05:28"
+}
