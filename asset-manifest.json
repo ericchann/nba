@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/nba/static/css/main.9db2101d.css",
-    "main.js": "/nba/static/js/main.e08c5f2a.js",
+    "main.js": "/nba/static/js/main.43561788.js",
     "index.html": "/nba/index.html",
     "main.9db2101d.css.map": "/nba/static/css/main.9db2101d.css.map",
-    "main.e08c5f2a.js.map": "/nba/static/js/main.e08c5f2a.js.map"
+    "main.43561788.js.map": "/nba/static/js/main.43561788.js.map"
   },
   "entrypoints": [
     "static/css/main.9db2101d.css",
-    "static/js/main.e08c5f2a.js"
+    "static/js/main.43561788.js"
   ]
 }
