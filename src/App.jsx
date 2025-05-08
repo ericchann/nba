@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import CheatSheet from './pages/CheatSheet';
 import MyBets from './pages/MyBets';
@@ -73,6 +73,10 @@ export default function App() {
     return () => clearInterval(intervalId);
   }, []);
 
+  const [data, setData] = useState([]);
+  const [headToHeadMap, setHeadToHeadMap] = useState({});
+  const last15GamesCache = useRef({});
+
   return (
     <BrowserRouter basename="/nba">
       <nav className="navbar">
@@ -86,7 +90,16 @@ export default function App() {
       <Routes>
         <Route
           path="/cheatsheet"
-          element={<CheatSheet onAddBet={addBet} />}
+          element={
+            <CheatSheet
+              onAddBet={addBet}
+              data={data}
+              setData={setData}
+              headToHeadMap={headToHeadMap}
+              setHeadToHeadMap={setHeadToHeadMap}
+              last15GamesCache={last15GamesCache}
+            />
+          }
         />
         <Route
           path="/bets"

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPlayerPhotoUrl, teamSlugMap } from '../utils';
 import playerIds from '../player_ids.json';
@@ -7,15 +7,19 @@ import playerIds from '../player_ids.json';
 const normalizeName = (name) =>
   name.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-export default function CheatSheet() {
-  const [data, setData] = useState([]);
+export default function CheatSheet({
+  data,
+  setData,
+  headToHeadMap,
+  setHeadToHeadMap,
+  last15GamesCache,
+  // ...other props...
+}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [sortKey, setSortKey] = useState('overUnderCount10'); // Default sort by L10
   const [sortDirection, setSortDirection] = useState('desc'); // Default to descending
-  const last15GamesCache = useRef({});
-  const [headToHeadMap, setHeadToHeadMap] = useState({});
   // Multi-select filters
   const [teamFilter, setTeamFilter] = useState([]);
   const [playerFilter, setPlayerFilter] = useState('');
@@ -62,16 +66,16 @@ export default function CheatSheet() {
   useEffect(() => {
     async function load() {
       try {
-        const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-          'https://showstone.io/api/cheat-sheet/?format=json'
-        )}`;
-        const res = await fetch(url);
+        // Use your Cloudflare CORS Anywhere proxy instead of allorigins
+        const apiUrl = 'https://showstone.io/api/cheat-sheet/?format=json';
+        const proxyUrl = `https://cloudflare-cors-anywhere.ericecchan6.workers.dev/?${encodeURIComponent(apiUrl)}`;
+        const res = await fetch(proxyUrl);
         const text = await res.text();
         if (text.trim().startsWith('<!DOCTYPE')) {
           throw new Error('Received HTML instead of JSON');
         }
-        const jsonRaw = JSON.parse(text);
-        const cheatData = JSON.parse(jsonRaw.contents);
+        // The proxy returns the raw JSON, so no need to parse .contents
+        const cheatData = JSON.parse(text);
         setData(cheatData);
       } catch (e) {
         console.error('Error fetching data:', e);
@@ -81,7 +85,7 @@ export default function CheatSheet() {
       }
     }
     load();
-  }, []);
+  }, [setData]);
 
   // Fetch Last 15 games for each unique player using the new proxy.
   useEffect(() => {
@@ -166,7 +170,7 @@ export default function CheatSheet() {
     if (data.length > 0) {
       loadLast15ForPage();
     }
-  }, [data]);
+  }, [data, last15GamesCache, setHeadToHeadMap]);
 
   // Merge last15 data into table data.
   const tableData = data.map((player) => {
