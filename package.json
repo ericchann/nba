@@ -1,7 +1,9 @@
 {
   "name": "cheat-sheet-app",
   "version": "0.1.0",
+  "homepage": "https://ericchann.github.io/nba",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.5",
     "@tailwindcss/vite": "^4.1.5",
@@ -9,6 +11,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.3",
@@ -20,7 +23,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "postbuild": "cp build/index.html build/404.html",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

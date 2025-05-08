@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# NBA Cheat Sheet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React web application that provides a comprehensive NBA player prop cheat sheet. It allows users to view, filter, and sort NBA player prop data, including recent performance trends, for making informed betting or fantasy decisions.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Player Prop Table:** Displays NBA players with their prop lines and recent over/under stats for the last 5, 10, and 15 games, as well as head-to-head (H2H) stats.
+- **Multi-Select Filtering:** Filter the table by one or more teams and features (stat types), and by a single player.
+- **Sorting:** Click any column header to sort by that column (e.g., by player name, team, prop, feature, or over/under counts).
+- **Team & Opponent Logos:** See team and opponent logos for quick visual reference.
+- **Add Bets:** Add "Over" or "Under" bets for any player/prop to your local storage for tracking.
+- **Responsive UI:** Modern, dark-themed interface with a styled filter bar and sortable table.
 
-### `npm start`
+## How It Works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Data Source:** The app fetches NBA player prop data from [showstone.io](https://showstone.io) via a CORS proxy.
+- **Caching:** Last 15 games for each player are fetched only once and cached for efficient filtering and sorting.
+- **Filtering:** Use the filter bar at the top to select teams, players, and features to display only the props you care about.
+- **Sorting:** By default, the table is sorted by "Last 10" (L10) over/under count in descending order.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Start the development server:**
+   ```bash
+   npm start
+   ```
 
-### `npm run build`
+3. **Open your browser:**  
+   Visit [http://localhost:3000](http://localhost:3000) to use the app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- `src/pages/CheatSheet.jsx` — Main page and logic for the NBA cheat sheet.
+- `src/utils.js` — Utility functions (e.g., for player photos, team slugs).
+- `src/player_ids.json` — Mapping of player names to unique IDs for API calls.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Customization
 
-### `npm run eject`
+- **Add/Remove Features:** You can adjust which features/stat types are shown by editing the data source or filtering logic.
+- **Styling:** The filter bar and table are styled for a dark theme, but you can customize the CSS in the component as needed.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MIT
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Note:** This project is not affiliated with the NBA or any betting provider. Data is for informational purposes only.

@@ -64,3 +64,7 @@ with open('response3.json', 'w') as f:
 print(response.status_code)
 print(response2.status_code)
 print(response3.status_code)
+
+
+
+print(requests.get('https://showstone.io/api/cheat-sheet/?format=json').status_code)

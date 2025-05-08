@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import CheatSheet from './pages/CheatSheet';
-import MyBets      from './pages/MyBets';
+import MyBets from './pages/MyBets';
+import PlayerDetail from './pages/PlayerDetail'; // Import the PlayerDetail page
 import './App.css';
 
-function App() {
+export default function App() {
   // Load from localStorage
   const [activeBets, setActiveBets] = useState(() => {
     const raw = localStorage.getItem('activeBets');
@@ -57,17 +58,34 @@ function App() {
   const removeActive = id => setActiveBets(prev => prev.filter(b => b.id !== id));
   const removePast   = id => setPastBets  (prev => prev.filter(b => b.id !== id));
 
+  // NEW: State for tracking number of bets.
+  const [betCount, setBetCount] = useState(0);
+
+  useEffect(() => {
+    const updateBetCount = () => {
+      const savedBets = JSON.parse(localStorage.getItem('myBets')) || [];
+      setBetCount(savedBets.length);
+    };
+
+    updateBetCount();
+    // Poll every second for changes.
+    const intervalId = setInterval(updateBetCount, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/nba">
       <nav className="navbar">
-        <Link to="/"     className="nav-button">Cheat Sheet</Link>
+        <Link to="/cheatsheet" className="nav-button">
+          Cheat Sheet
+        </Link>
         <Link to="/bets" className="nav-button">
-          My Bets ({activeBets.length})
+          My Bets ({betCount})
         </Link>
       </nav>
       <Routes>
         <Route
-          path="/"
+          path="/cheatsheet"
           element={<CheatSheet onAddBet={addBet} />}
         />
         <Route
@@ -75,16 +93,17 @@ function App() {
           element={
             <MyBets
               activeBets={activeBets}
-              pastBets   ={pastBets}
+              pastBets={pastBets}
               onRemoveActive={removeActive}
-              onRemovePast  ={removePast}
-              onArchive     ={archiveBet}
+              onRemovePast={removePast}
+              onArchive={archiveBet}
             />
           }
         />
+        {/* New route for PlayerDetail page */}
+        <Route path="/player/:id" element={<PlayerDetail />} />
+        <Route path="*" element={<Navigate to="/cheatsheet" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
-export default App;
