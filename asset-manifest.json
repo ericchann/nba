@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/yomama/static/css/main.116d5533.css",
-    "main.js": "/yomama/static/js/main.862abc78.js",
+    "main.js": "/yomama/static/js/main.3f8135d7.js",
     "index.html": "/yomama/index.html",
     "main.116d5533.css.map": "/yomama/static/css/main.116d5533.css.map",
-    "main.862abc78.js.map": "/yomama/static/js/main.862abc78.js.map"
+    "main.3f8135d7.js.map": "/yomama/static/js/main.3f8135d7.js.map"
   },
   "entrypoints": [
     "static/css/main.116d5533.css",
-    "static/js/main.862abc78.js"
+    "static/js/main.3f8135d7.js"
   ]
 }
