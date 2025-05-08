@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/nba/static/css/main.116d5533.css",
-    "main.js": "/nba/static/js/main.862abc78.js",
-    "index.html": "/nba/index.html",
-    "main.116d5533.css.map": "/nba/static/css/main.116d5533.css.map",
-    "main.862abc78.js.map": "/nba/static/js/main.862abc78.js.map"
+    "main.css": "/yomama/static/css/main.116d5533.css",
+    "main.js": "/yomama/static/js/main.862abc78.js",
+    "index.html": "/yomama/index.html",
+    "main.116d5533.css.map": "/yomama/static/css/main.116d5533.css.map",
+    "main.862abc78.js.map": "/yomama/static/js/main.862abc78.js.map"
   },
   "entrypoints": [
     "static/css/main.116d5533.css",
