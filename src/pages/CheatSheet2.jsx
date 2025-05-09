@@ -33,6 +33,34 @@ const getFeature = (market_id) => {
   return map[market_id] || market_id;
 };
 
+// Helper: get stat value from player-game-stats row for a feature
+const getStatValue = (stat, feature) => {
+  switch (feature) {
+    case 'points':
+      return Number(stat.points);
+    case 'assists':
+      return Number(stat.assists);
+    case 'rebounds':
+      return Number(stat.rebounds);
+    case 'steals':
+      return Number(stat.steals);
+    case 'blocks':
+      return Number(stat.blocks);
+    case 'turnovers':
+      return Number(stat.turnovers);
+    case 'pts+ast':
+      return Number(stat.points) + Number(stat.assists);
+    case 'pts+reb':
+      return Number(stat.points) + Number(stat.rebounds);
+    case 'ast+reb':
+      return Number(stat.assists) + Number(stat.rebounds);
+    case 'pts+ast+reb':
+      return Number(stat.points) + Number(stat.assists) + Number(stat.rebounds);
+    default:
+      return NaN;
+  }
+};
+
 export default function CheatSheet2() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +68,8 @@ export default function CheatSheet2() {
   const [playerMeta, setPlayerMeta] = useState({});
   const [teamEvents, setTeamEvents] = useState({});
   const [playerH2H, setPlayerH2H] = useState({});
-  const [playerStats, setPlayerStats] = useState({});
+  const [playerStatsRegular, setPlayerStatsRegular] = useState({});
+  const [playerStatsH2H, setPlayerStatsH2H] = useState({});
   const [finalPerformance, setFinalPerformance] = useState({});
   const [sortKey, setSortKey] = useState('performance_last_10');
   const [sortDirection, setSortDirection] = useState('desc');
@@ -52,7 +81,6 @@ export default function CheatSheet2() {
   const metaCache = useRef({});
   const eventsCache = useRef({});
   const h2hCache = useRef({});
-  const statsCache = useRef({});
 
   // 1. Fetch main props data
   useEffect(() => {
@@ -61,7 +89,7 @@ export default function CheatSheet2() {
       setError(null);
       try {
         const today = getToday();
-        const url = `https://api.bettingpros.com/v3/props?limit=100&page=1&sport=NBA&market_id=156:157:151:162:160:152:335:336:337:338&date=${today}&location=MA&book_id=37&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_correlated_picks=true&correlated_picks_limit=1&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15`;
+        const url = `https://api.bettingpros.com/v3/props?limit=100&page=1&sport=NBA&market_id=156:157:151:162:160:152:335:336:337:338&date=${today}&location=MA&book_id=10&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_correlated_picks=true&correlated_picks_limit=1&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15`;
         const res = await fetch(url, {
           headers: { "x-api-key": API_KEY },
         });
@@ -116,7 +144,7 @@ export default function CheatSheet2() {
           continue;
         }
         // Use points (156) as default market_id for event list
-        const url = `https://api.bettingpros.com/v3/props/compare?sport=NBA&market_id=156&team_id=${team}&season=2024&limit=16&include_no_line_events=true`;
+        const url = `https://api.bettingpros.com/v3/props/compare?sport=NBA&market_id=156&position=G&team_id=${team}&season=2024&limit=16&include_no_line_events=true`;
         const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const eventIds = (data.events || []).map(e => e.event.id);
@@ -128,34 +156,38 @@ export default function CheatSheet2() {
     fetchEvents();
   }, [propsData, playerMeta]);
 
-  // 4. Fetch H2H event IDs for each player/team (cache by player+team)
+  // 4. Fetch H2H event IDs for each team (cache by team)
   useEffect(() => {
     if (!propsData.length || !Object.keys(playerMeta).length) return;
+    const teams = Array.from(new Set(propsData.map(p => {
+      const meta = playerMeta[p.participant.name];
+      return meta ? meta.team : null;
+    }).filter(Boolean)));
     const fetchH2H = async () => {
       const newH2H = {};
-      for (const p of propsData) {
-        const meta = playerMeta[p.participant.name];
-        if (!meta) continue;
-        const key = `${meta.player_id}_${meta.team}`;
-        if (h2hCache.current[key]) {
-          newH2H[key] = h2hCache.current[key];
+      for (const team of teams) {
+        if (h2hCache.current[team]) {
+          newH2H[team] = h2hCache.current[team];
           continue;
         }
-        const url = `https://api.bettingpros.com/v3/props/analysis?include_no_line_events=true&player_id=${meta.player_id}&market_id=156&location=ALL&sort=desc&sport=NBA&limit=3&filter_head_to_head=${meta.team}`;
+        // Use any player_id from this team (first found)
+        const player = propsData.find(p => playerMeta[p.participant.name]?.team === team);
+        const player_id = playerMeta[player.participant.name].player_id;
+        const url = `https://api.bettingpros.com/v3/props/analysis?include_no_line_events=true&player_id=${player_id}&market_id=156&location=ALL&sort=desc&sport=NBA&limit=3&filter_head_to_head=${team}`;
         const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const eventIds = (data.analyses || []).map(a => a.event.id);
-        h2hCache.current[key] = eventIds;
-        newH2H[key] = eventIds;
+        h2hCache.current[team] = eventIds;
+        newH2H[team] = eventIds;
       }
       setPlayerH2H(prev => ({ ...prev, ...newH2H }));
     };
     fetchH2H();
   }, [propsData, playerMeta]);
 
-  // 5. Fetch player stats for all event IDs (cache by event_id)
+  // 5. Fetch regular (L15/L10/L5) stats
   useEffect(() => {
-    if (!propsData.length || !Object.keys(playerMeta).length || !Object.keys(teamEvents).length || !Object.keys(playerH2H).length) return;
+    if (!propsData.length || !Object.keys(playerMeta).length || !Object.keys(teamEvents).length) return;
     const fetchStats = async () => {
       const allEventIds = new Set();
       for (const p of propsData) {
@@ -163,32 +195,60 @@ export default function CheatSheet2() {
         if (!meta) continue;
         const team = meta.team;
         const events = teamEvents[team] || [];
-        const key = `${meta.player_id}_${team}`;
-        const h2h = playerH2H[key] || [];
-        [...events, ...h2h].forEach(id => allEventIds.add(id));
+        events.forEach(id => allEventIds.add(id));
       }
-      // Only fetch stats for event_ids not in cache
-      const missing = Array.from(allEventIds).filter(id => !statsCache.current[id]);
+      const missing = Array.from(allEventIds);
       if (missing.length) {
-        const chunkSize = 20;
-        for (let i = 0; i < missing.length; i += chunkSize) {
-          const chunk = missing.slice(i, i + chunkSize);
-          const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${chunk.join(':')}&sport=NBA`;
-          const res = await fetch(url);
-          const data = await res.json();
-          for (const player of data.players || []) {
-            statsCache.current[player.game_id] = player;
-          }
+        const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const stats = {};
+        for (const player of data.players || []) {
+          stats[player.game_id] = player;
         }
+        setPlayerStatsRegular(stats);
       }
-      setPlayerStats({ ...statsCache.current });
     };
     fetchStats();
-  }, [propsData, playerMeta, teamEvents, playerH2H]);
+  }, [propsData, playerMeta, teamEvents]);
 
-  // 6. Calculate L5, L10, L15, H2H for each row
+  // 6. Fetch H2H stats
   useEffect(() => {
-    if (!propsData.length || !Object.keys(playerMeta).length || !Object.keys(teamEvents).length || !Object.keys(playerH2H).length || !Object.keys(playerStats).length) return;
+    if (!propsData.length || !Object.keys(playerMeta).length || !Object.keys(playerH2H).length) return;
+    const fetchStats = async () => {
+      const allEventIds = new Set();
+      for (const p of propsData) {
+        const meta = playerMeta[p.participant.name];
+        if (!meta) continue;
+        const team = meta.team;
+        const h2h = playerH2H[team] || [];
+        h2h.forEach(id => allEventIds.add(id));
+      }
+      const missing = Array.from(allEventIds);
+      if (missing.length) {
+        const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const stats = {};
+        for (const player of data.players || []) {
+          stats[player.game_id] = player;
+        }
+        setPlayerStatsH2H(stats);
+      }
+    };
+    fetchStats();
+  }, [propsData, playerMeta, playerH2H]);
+
+  // 7. Calculate L5, L10, L15, H2H for each row
+  useEffect(() => {
+    if (
+      !propsData.length ||
+      !Object.keys(playerMeta).length ||
+      !Object.keys(teamEvents).length ||
+      !Object.keys(playerH2H).length ||
+      !Object.keys(playerStatsRegular).length ||
+      !Object.keys(playerStatsH2H).length
+    ) return;
     const perf = {};
     for (const p of propsData) {
       const meta = playerMeta[p.participant.name];
@@ -196,9 +256,17 @@ export default function CheatSheet2() {
       const team = meta.team;
       const player_id = meta.player_id;
       const events = teamEvents[team] || [];
-      const key = `${player_id}_${team}`;
-      const h2h = playerH2H[key] || [];
-      const allEvents = events.map(id => playerStats[id]).filter(Boolean).filter(stat => stat.player_id === player_id);
+      const h2h = playerH2H[team] || [];
+      const allEvents = events
+        .map(id => playerStatsRegular[id])
+        .filter(Boolean)
+        .filter(stat => stat.player_id === player_id)
+        .sort((a, b) => new Date(b.game_date) - new Date(a.game_date)); // Most recent first
+      const h2hEvents = h2h
+        .map(id => playerStatsH2H[id])
+        .filter(Boolean)
+        .filter(stat => stat.player_id === player_id)
+        .sort((a, b) => new Date(b.game_date) - new Date(a.game_date));
       const feature = getFeature(p.market_id);
       const propLine = p.over?.line ?? p.under?.line ?? null;
       // Helper to count over/under for N games
@@ -206,7 +274,7 @@ export default function CheatSheet2() {
         let over = 0, under = 0;
         for (let i = 0; i < Math.min(n, arr.length); i++) {
           const stat = arr[i];
-          const val = Number(stat[feature]);
+          const val = getStatValue(stat, feature);
           if (propLine == null || isNaN(val)) continue;
           if (val > propLine) over++;
           else under++;
@@ -217,12 +285,12 @@ export default function CheatSheet2() {
         last_5: countOverUnder(allEvents, 5),
         last_10: countOverUnder(allEvents, 10),
         last_15: countOverUnder(allEvents, 15),
-        h2h: countOverUnder(h2h.map(id => playerStats[id]).filter(Boolean), 3),
+        h2h: countOverUnder(h2hEvents, 3),
         streak: 0, // You can add streak logic if needed
       };
     }
     setFinalPerformance(perf);
-  }, [propsData, playerMeta, teamEvents, playerH2H, playerStats]);
+  }, [propsData, playerMeta, teamEvents, playerH2H, playerStatsRegular, playerStatsH2H]);
 
   // Helper: get player photo
   const getPlayerPhoto = (player) =>
@@ -235,7 +303,7 @@ export default function CheatSheet2() {
 
   // Helper: render over/under cell
   const renderOverUnderCell = (countObj, total) => {
-    if (!countObj) return 'N/A';
+    if (!countObj || (countObj.over + countObj.under) < total) return 'N/A';
     const { over = 0, under = 0 } = countObj;
     let color = 'green';
     let main = over;
@@ -306,16 +374,6 @@ export default function CheatSheet2() {
         }}
       >
         #{rank}
-      </span>
-    );
-  };
-
-  // Helper: render streak
-  const renderStreak = (performance) => {
-    if (!performance) return 'N/A';
-    return (
-      <span>
-        {performance.streak_type === 'over' ? 'Over' : 'Under'} {performance.streak}
       </span>
     );
   };
@@ -434,7 +492,7 @@ export default function CheatSheet2() {
   const uniquePlayers = Array.from(new Set(propsData.map(p => p.participant.name))).sort();
   const uniqueFeatures = Array.from(new Set(propsData.map(p => getFeature(p.market_id)))).sort();
 
-  // Filter bar styles (move these up if you want to use them in your filter bar)
+  // Filter bar styles
   const filterBarStyle = {
     marginBottom: 20,
     display: 'flex',
@@ -629,7 +687,15 @@ export default function CheatSheet2() {
                 <td>{renderOverUnderCell(perf.last_10, 10)}</td>
                 <td>{renderOverUnderCell(perf.last_15, 15)}</td>
                 <td>{renderOverUnderCell(perf.h2h, 3)}</td>
-                <td>{renderStreak(perf)}</td>
+                <td>
+                  {p.performance && typeof p.performance.streak === 'number'
+                    ? (
+                      <span>
+                        {p.performance.streak_type === 'over' ? 'Over' : 'Under'} {p.performance.streak}
+                      </span>
+                    )
+                    : 'N/A'}
+                </td>
                 <td>{renderCorrelatedPicks(p.correlated_picks)}</td>
                 <td>
                   <button
