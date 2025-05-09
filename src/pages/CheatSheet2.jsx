@@ -89,7 +89,7 @@ export default function CheatSheet2() {
       setError(null);
       try {
         const today = getToday();
-        const url = `https://api.bettingpros.com/v3/props?limit=100&page=1&sport=NBA&market_id=156:157:151:162:160:152:335:336:337:338&date=${today}&location=MA&book_id=10&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_correlated_picks=true&correlated_picks_limit=1&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15`;
+        const url = `https://api.bettingpros.com/v3/props?limit=200&page=1&sport=NBA&market_id=156:157:151:162:160:152:335:336:337:338&date=${today}&location=MA&book_id=37&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_correlated_picks=true&correlated_picks_limit=1&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15`;
         const res = await fetch(url, {
           headers: { "x-api-key": API_KEY },
         });
@@ -144,7 +144,7 @@ export default function CheatSheet2() {
           continue;
         }
         // Use points (156) as default market_id for event list
-        const url = `https://api.bettingpros.com/v3/props/compare?sport=NBA&market_id=156&position=G&team_id=${team}&season=2024&limit=16&include_no_line_events=true`;
+        const url = `https://api.bettingpros.com/v3/props/compare?sport=NBA&market_id=156&position=G&team_id=${team}&season=2024&limit=15&include_no_line_events=true`;
         const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const eventIds = (data.events || []).map(e => e.event.id);
@@ -202,11 +202,8 @@ export default function CheatSheet2() {
         const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
         const res = await fetch(url);
         const data = await res.json();
-        const stats = {};
-        for (const player of data.players || []) {
-          stats[player.game_id] = player;
-        }
-        setPlayerStatsRegular(stats);
+        const statsArr = data.players || [];
+        setPlayerStatsRegular(statsArr);
       }
     };
     fetchStats();
@@ -229,11 +226,8 @@ export default function CheatSheet2() {
         const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
         const res = await fetch(url);
         const data = await res.json();
-        const stats = {};
-        for (const player of data.players || []) {
-          stats[player.game_id] = player;
-        }
-        setPlayerStatsH2H(stats);
+        const statsArr = data.players || [];
+        setPlayerStatsH2H(statsArr);
       }
     };
     fetchStats();
@@ -249,6 +243,8 @@ export default function CheatSheet2() {
       !Object.keys(playerStatsRegular).length ||
       !Object.keys(playerStatsH2H).length
     ) return;
+    //console.log('playerStatsRegular:', playerStatsRegular);
+    //console.log('playerStatsH2H:', playerStatsH2H);
     const perf = {};
     for (const p of propsData) {
       const meta = playerMeta[p.participant.name];
@@ -257,16 +253,14 @@ export default function CheatSheet2() {
       const player_id = meta.player_id;
       const events = teamEvents[team] || [];
       const h2h = playerH2H[team] || [];
-      const allEvents = events
-        .map(id => playerStatsRegular[id])
-        .filter(Boolean)
-        .filter(stat => stat.player_id === player_id)
+      //console.log('Player:', p.participant.name, 'Events:', events, 'H2H:', h2h);
+      const allEvents = playerStatsRegular
+        .filter(stat => events.map(String).includes(String(stat.game_id)) && String(stat.player_id) === String(player_id))
         .sort((a, b) => new Date(b.game_date) - new Date(a.game_date)); // Most recent first
-      const h2hEvents = h2h
-        .map(id => playerStatsH2H[id])
-        .filter(Boolean)
-        .filter(stat => stat.player_id === player_id)
+      const h2hEvents = playerStatsH2H
+        .filter(stat => h2h.map(String).includes(String(stat.game_id)) && String(stat.player_id) === String(player_id))
         .sort((a, b) => new Date(b.game_date) - new Date(a.game_date));
+      //console.log('Player:', p.participant.name, 'allEvents:', allEvents, 'h2hEvents:', h2hEvents);
       const feature = getFeature(p.market_id);
       const propLine = p.over?.line ?? p.under?.line ?? null;
       // Helper to count over/under for N games
@@ -275,6 +269,7 @@ export default function CheatSheet2() {
         for (let i = 0; i < Math.min(n, arr.length); i++) {
           const stat = arr[i];
           const val = getStatValue(stat, feature);
+          //console.log('Stat:', stat, 'Feature:', feature, 'Value:', val, 'PropLine:', propLine);
           if (propLine == null || isNaN(val)) continue;
           if (val > propLine) over++;
           else under++;
@@ -385,7 +380,9 @@ export default function CheatSheet2() {
       <div>
         {correlated_picks.map((pick, i) => (
           <div key={i}>
-            {pick.participant?.name || 'Unknown'} {pick.line !== undefined ? `(${pick.line})` : ''}
+            {pick.participant?.name || 'Unknown'}
+            {pick.market_id !== undefined ? ` (${getFeature(pick.market_id)})` : ''}
+            {pick.line !== undefined ? ` [${pick.line}]` : ''}
           </div>
         ))}
       </div>
