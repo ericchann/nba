@@ -1,7 +1,7 @@
 {
   "name": "cheat-sheet-app",
   "version": "0.1.0",
-  "homepage": "https://ericchann.github.io/nba",
+  "homepage": "https://ericchann.github.io/yomama",
   "private": true,
   "type": "module",
   "dependencies": {

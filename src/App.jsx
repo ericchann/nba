@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import CheatSheet from './pages/CheatSheet';
+import CheatSheet2 from './pages/CheatSheet2'; // or CheatSheetV2
 import MyBets from './pages/MyBets';
 import PlayerDetail from './pages/PlayerDetail'; // Import the PlayerDetail page
 import './App.css';
@@ -78,10 +79,13 @@ export default function App() {
   const last15GamesCache = useRef({});
 
   return (
-    <BrowserRouter basename="/nba">
+    <BrowserRouter basename="/yomama">
       <nav className="navbar">
         <Link to="/cheatsheet" className="nav-button">
           Cheat Sheet
+        </Link>
+        <Link to="/cheatsheet2" className="nav-button">
+          Cheat Sheet v2
         </Link>
         <Link to="/bets" className="nav-button">
           My Bets ({betCount})
@@ -115,6 +119,7 @@ export default function App() {
         />
         {/* New route for PlayerDetail page */}
         <Route path="/player/:id" element={<PlayerDetail />} />
+        <Route path="/cheatsheet2" element={<CheatSheet2 />} />
         <Route path="*" element={<Navigate to="/cheatsheet" replace />} />
       </Routes>
     </BrowserRouter>

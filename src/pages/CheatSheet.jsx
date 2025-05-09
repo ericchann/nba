@@ -240,15 +240,15 @@ export default function CheatSheet({
     let aVal = a[sortKey];
     let bVal = b[sortKey];
 
-    // Special handling for over/under columns
+    // Special handling for over/under columns: sort by numerator (the higher of over/under)
     if (
       sortKey === 'overUnderCount' ||
       sortKey === 'overUnderCount5' ||
       sortKey === 'overUnderCount10' ||
       sortKey === 'overUnderCountH2H'
     ) {
-      aVal = a[sortKey] ? a[sortKey].over : -1;
-      bVal = b[sortKey] ? b[sortKey].over : -1;
+      aVal = a[sortKey] ? Math.max(a[sortKey].over, a[sortKey].under) : -1;
+      bVal = b[sortKey] ? Math.max(b[sortKey].over, b[sortKey].under) : -1;
     }
 
     // For strings, case-insensitive compare
@@ -265,20 +265,46 @@ export default function CheatSheet({
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  // Helper for colored cell
+  // Helper for colored cell with correct logic for L5, L10, L15, H2H
   const renderOverUnderCell = (countObj, total) => {
     if (!countObj) return 'N/A';
-    const isOver = countObj.over > countObj.under;
+    const { over, under } = countObj;
+    let color = 'green';
+    let main = over;
+    if (over > under) {
+      color = 'green';
+      main = over;
+    } else if (under > over) {
+      color = 'red';
+      main = under;
+    } else {
+      // Tie case (e.g., 5/10), highlight yellow
+      color = 'yellow';
+      main = over; // or under, since they're equal
+    }
+    // For L10, if 5/10, highlight yellow
+    if (total === 10 && over === 5 && under === 5) {
+      color = 'yellow';
+      main = 5;
+    }
+    // For L5/L15, if tie, highlight yellow
+    if ((total === 5 || total === 15) && over === under) {
+      color = 'yellow';
+      main = over;
+    }
+    // Always show at least 3/5, 5/10, 8/15, etc.
+    main = Math.max(main, Math.ceil(total / 2));
     return (
       <span
         style={{
-          backgroundColor: isOver ? 'green' : 'red',
-          color: 'white',
+          backgroundColor: color,
+          color: color === 'yellow' ? '#222' : 'white',
           padding: '2px 4px',
-          borderRadius: '4px'
+          borderRadius: '4px',
+          fontWeight: 600,
         }}
       >
-        {countObj.over}/{total}
+        {main}/{total}
       </span>
     );
   };
