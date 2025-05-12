@@ -8,6 +8,7 @@ const getToday = () => {
 };
 
 const API_KEY = "CHi8Hy5CEE4khd46XNYL23dCFX96oUdw6qOt1Dnh";
+const proxyUrl = (url) => `https://cloudflare-cors-anywhere.ericecchan6.workers.dev/?${encodeURIComponent(url)}`;
 
 const getTeamLogo = (abbr) => {
   const slug = teamSlugMap[abbr];
@@ -90,9 +91,7 @@ export default function CheatSheet2() {
       try {
         const today = getToday();
         const url = `https://api.bettingpros.com/v3/props?limit=200&page=1&sport=NBA&market_id=156:157:151:162:160:152:335:336:337:338&date=${today}&location=MA&book_id=37&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_correlated_picks=true&correlated_picks_limit=1&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15`;
-        const res = await fetch(url, {
-          headers: { "x-api-key": API_KEY },
-        });
+        const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data = await res.json();
         setPropsData(data.props || []);
@@ -110,7 +109,7 @@ export default function CheatSheet2() {
     if (!propsData.length) return;
     const fetchMeta = async () => {
       const url = `https://api.bettingpros.com/v3/markets/offer-counts?sport=NBA&season=2024&market_category=player-futures&location=MA`;
-      const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
+      const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
       const data = await res.json();
       const meta = {};
       for (const detail of data.details) {
@@ -145,7 +144,7 @@ export default function CheatSheet2() {
         }
         // Use points (156) as default market_id for event list
         const url = `https://api.bettingpros.com/v3/props/compare?sport=NBA&market_id=156&position=G&team_id=${team}&season=2024&limit=15&include_no_line_events=true`;
-        const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
+        const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const eventIds = (data.events || []).map(e => e.event.id);
         eventsCache.current[team] = eventIds;
@@ -174,7 +173,7 @@ export default function CheatSheet2() {
         const player = propsData.find(p => playerMeta[p.participant.name]?.team === team);
         const player_id = playerMeta[player.participant.name].player_id;
         const url = `https://api.bettingpros.com/v3/props/analysis?include_no_line_events=true&player_id=${player_id}&market_id=156&location=ALL&sort=desc&sport=NBA&limit=3&filter_head_to_head=${team}`;
-        const res = await fetch(url, { headers: { "x-api-key": API_KEY } });
+        const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const eventIds = (data.analyses || []).map(a => a.event.id);
         h2hCache.current[team] = eventIds;
@@ -200,7 +199,7 @@ export default function CheatSheet2() {
       const missing = Array.from(allEventIds);
       if (missing.length) {
         const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
-        const res = await fetch(url);
+        const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const statsArr = data.players || [];
         setPlayerStatsRegular(statsArr);
@@ -224,7 +223,7 @@ export default function CheatSheet2() {
       const missing = Array.from(allEventIds);
       if (missing.length) {
         const url = `https://partners.fantasypros.com/api/v1/player-game-stats.php?event_id=${missing.join(':')}&sport=NBA`;
-        const res = await fetch(url);
+        const res = await fetch(proxyUrl(url), { headers: { "x-api-key": API_KEY } });
         const data = await res.json();
         const statsArr = data.players || [];
         setPlayerStatsH2H(statsArr);
