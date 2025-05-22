@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getPlayerPhotoUrl, teamSlugMap } from '../utils';
-import playerIds from '../player_ids.json';
+import { getPlayerPhotoUrl, teamSlugMap, wnbaTeamSlugMap } from '../utils';
 
 // Helper to normalize name
 const normalizeName = (name) =>
@@ -12,7 +11,6 @@ export default function CheatSheet({
   setData,
   headToHeadMap,
   setHeadToHeadMap,
-  last15GamesCache,
   // ...other props...
 }) {
   const [loading, setLoading] = useState(true);
@@ -26,11 +24,15 @@ export default function CheatSheet({
   const [featureFilter, setFeatureFilter] = useState([]);
 
   // Helper: return team logo URL
-  const getTeamLogo = (abbr) => {
-    const slug = teamSlugMap[abbr];
-    return slug
-      ? `https://showstone.io/team_logos/${slug}.png`
-      : 'https://via.placeholder.com/50';
+  const getTeamLogo = (abbr, player) => {
+    // Use player.league to determine league
+    if (player.league === 'WNBA' && wnbaTeamSlugMap[abbr]) {
+      return `https://showstone.io/wnba_team_logos/${wnbaTeamSlugMap[abbr]}.png`;
+    }
+    if (teamSlugMap[abbr]) {
+      return `https://showstone.io/team_logos/${teamSlugMap[abbr]}.png`;
+    }
+    return 'https://via.placeholder.com/50';
   };
 
   // Handler to add a bet for a player.
@@ -87,144 +89,34 @@ export default function CheatSheet({
     load();
   }, [setData]);
 
-  // Fetch Last 15 games for each unique player using the new proxy.
-  useEffect(() => {
-    async function loadLast15ForPage() {
-      // Get unique effectiveIds
-      const uniquePlayers = {};
-      data.forEach((player) => {
-        const matchingEntry = Object.entries(playerIds).find(
-          ([name, id]) =>
-            normalizeName(name).toLowerCase() ===
-            normalizeName(player.player_name).toLowerCase()
-        );
-        const effectiveId = matchingEntry ? matchingEntry[1] : player.id;
-        if (!uniquePlayers[effectiveId]) {
-          uniquePlayers[effectiveId] = player;
-        }
-      });
-
-      const newHeadToHeadMap = {};
-      await Promise.all(
-        Object.entries(uniquePlayers).map(async ([effectiveId, player]) => {
-          let last15Games = last15GamesCache.current[effectiveId];
-          if (!last15Games) {
-            const urlLast15 = `https://showstone.io/api/players/filter_by_player/?format=json&metrics=ftm&metrics=fta&metrics=fg2m&metrics=fg3m&metrics=fg3a&metrics=fgm&metrics=fga&metrics=fg2a&metrics=game_date&metrics=opponent&metrics=min&metrics=ast&metrics=reb&metrics=blk&metrics=stl&metrics=home_or_away&metrics=pts&metrics=plus_minus&player_id=${effectiveId}&x=15`;
-            const proxyUrl = `https://cloudflare-cors-anywhere.ericecchan6.workers.dev/?${encodeURIComponent(urlLast15)}`;
-            try {
-              const resLast15 = await fetch(proxyUrl);
-              const textLast15 = await resLast15.text();
-              if (textLast15.trim().startsWith('<!DOCTYPE')) {
-                throw new Error('Error fetching last15');
-              }
-              last15Games = JSON.parse(textLast15);
-              if (!Array.isArray(last15Games)) throw new Error('Not an array');
-              last15GamesCache.current[effectiveId] = last15Games; // Cache it!
-            } catch (error) {
-              console.error("Error fetching last15 for", player.player_name, error);
-              newHeadToHeadMap[effectiveId] = null;
-              return;
-            }
-          }
-          // Head-to-head last 3 (filter by opponent)
-          const opp = player.opponent;
-          const h2hGames = last15GamesCache.current[effectiveId]
-            ? last15GamesCache.current[effectiveId].filter(g => g.opponent === opp).slice(0, 3)
-            : [];
-          // Use the feature and threshold from the first occurrence (for H2H)
-          const key = player.feature;
-          const thresholdVal = parseFloat(player.threshold);
-          const calcOverUnder = (games) => {
-            let overCount = 0;
-            games.forEach((game) => {
-              let statVal;
-              switch (key) {
-                case "pts_ast":
-                  statVal = parseFloat(game["pts"] || 0) + parseFloat(game["ast"] || 0);
-                  break;
-                case "pts_reb":
-                  statVal = parseFloat(game["pts"] || 0) + parseFloat(game["reb"] || 0);
-                  break;
-                case "ast_reb":
-                  statVal = parseFloat(game["ast"] || 0) + parseFloat(game["reb"] || 0);
-                  break;
-                case "pts_ast_reb":
-                  statVal =
-                    parseFloat(game["pts"] || 0) +
-                    parseFloat(game["ast"] || 0) +
-                    parseFloat(game["reb"] || 0);
-                  break;
-                default:
-                  statVal = parseFloat(game[key]);
-              }
-              if (!isNaN(statVal) && statVal >= thresholdVal) overCount++;
-            });
-            return { over: overCount, under: games.length - overCount };
-          };
-          newHeadToHeadMap[effectiveId] = calcOverUnder(h2hGames);
-        })
-      );
-      setHeadToHeadMap((prev) => ({ ...prev, ...newHeadToHeadMap }));
-    }
-
-    if (data.length > 0) {
-      loadLast15ForPage();
-    }
-  }, [data, last15GamesCache, setHeadToHeadMap]);
+  // Helper for over/under calculation
+  const calcOverUnderArr = (arr, threshold) => {
+    let over = 0;
+    arr.forEach(val => {
+      if (val == null || isNaN(val)) return;
+      if (Number(val) > Number(threshold)) over++;
+    });
+    return { over, under: arr.length - over };
+  };
 
   // Merge last15 data into table data.
   const tableData = data.map((player) => {
-    const matchingEntry = Object.entries(playerIds).find(
-      ([name, id]) =>
-        normalizeName(name).toLowerCase() ===
-        normalizeName(player.player_name).toLowerCase()
-    );
-    const effectiveId = matchingEntry ? matchingEntry[1] : player.id;
-    const last15Games = last15GamesCache.current[effectiveId];
-
-    // Calculate over/under for L15, L10, L5, H2H using last15Games
-    const key = player.feature;
-    const thresholdVal = parseFloat(player.threshold);
-
-    const calcOverUnder = (games) => {
-      let overCount = 0;
-      games.forEach((game) => {
-        let statVal;
-        switch (key) {
-          case "pts_ast":
-            statVal = parseFloat(game["pts"] || 0) + parseFloat(game["ast"] || 0);
-            break;
-          case "pts_reb":
-            statVal = parseFloat(game["pts"] || 0) + parseFloat(game["reb"] || 0);
-            break;
-          case "ast_reb":
-            statVal = parseFloat(game["ast"] || 0) + parseFloat(game["reb"] || 0);
-            break;
-          case "pts_ast_reb":
-            statVal =
-              parseFloat(game["pts"] || 0) +
-              parseFloat(game["ast"] || 0) +
-              parseFloat(game["reb"] || 0);
-            break;
-          default:
-            statVal = parseFloat(game[key]);
-        }
-        if (!isNaN(statVal) && statVal >= thresholdVal) overCount++;
-      });
-      return { over: overCount, under: games.length - overCount };
-    };
-
-    const overUnderCount = last15Games ? calcOverUnder(last15Games.slice(0, 15)) : null;
-    const overUnderCount5 = last15Games ? calcOverUnder(last15Games.slice(0, 5)) : null;
-    const overUnderCount10 = last15Games ? calcOverUnder(last15Games.slice(0, 10)) : null;
-    const overUnderCountH2H = headToHeadMap[effectiveId];
+    const l15Arr = Array.isArray(player.l15) ? player.l15.map(Number) : [];
+    const l10Arr = l15Arr.slice(-10);
+    const l5Arr = l15Arr.slice(-5);
+    const h2hArr = Array.isArray(player.last3_vs_opponent) ? player.last3_vs_opponent.map(Number) : [];
+    const threshold = Number(player.threshold);
 
     return {
       ...player,
-      overUnderCount,
-      overUnderCount5,
-      overUnderCount10,
-      overUnderCountH2H,
+      overUnderCount15: calcOverUnderArr(l15Arr, threshold),
+      overUnderCount10: calcOverUnderArr(l10Arr, threshold),
+      overUnderCount5: calcOverUnderArr(l5Arr, threshold),
+      overUnderCountH2H: calcOverUnderArr(h2hArr, threshold),
+      l15Length: l15Arr.length,
+      l10Length: l10Arr.length,
+      l5Length: l5Arr.length,
+      h2hLength: h2hArr.length,
     };
   });
 
@@ -271,28 +163,38 @@ export default function CheatSheet({
     const { over, under } = countObj;
     let color = 'green';
     let main = over;
-    if (over > under) {
-      color = 'green';
-      main = over;
-    } else if (under > over) {
-      color = 'red';
-      main = under;
+  
+    // H2H (3): never yellow
+    if (total === 3) {
+      if (over > under) {
+        color = 'green';
+        main = over;
+      } else {
+        color = 'red';
+        main = under;
+      }
     } else {
-      // Tie case (e.g., 5/10), highlight yellow
-      color = 'yellow';
-      main = over; // or under, since they're equal
+      // L10: 5/10 is yellow
+      if (total === 10 && over === 5 && under === 5) {
+        color = 'yellow';
+        main = 5;
+      }
+      // L5/L15: tie is yellow
+      else if ((total === 5 || total === 15) && over === under) {
+        color = 'yellow';
+        main = over;
+      }
+      // Otherwise, green for more overs, red for more unders
+      else if (over > under) {
+        color = 'green';
+        main = over;
+      } else if (under > over) {
+        color = 'red';
+        main = under;
+      }
     }
-    // For L10, if 5/10, highlight yellow
-    if (total === 10 && over === 5 && under === 5) {
-      color = 'yellow';
-      main = 5;
-    }
-    // For L5/L15, if tie, highlight yellow
-    if ((total === 5 || total === 15) && over === under) {
-      color = 'yellow';
-      main = over;
-    }
-    // Always show at least 3/5, 5/10, 8/15, etc.
+  
+    // Always show at least half (rounded up)
     main = Math.max(main, Math.ceil(total / 2));
     return (
       <span
@@ -439,8 +341,8 @@ export default function CheatSheet({
             <th className="sortable" style={{ cursor: 'pointer' }} onClick={() => handleSort('overUnderCount10')}>
               Last 10{renderSortIndicator('overUnderCount10')}
             </th>
-            <th className="sortable" style={{ cursor: 'pointer' }} onClick={() => handleSort('overUnderCount')}>
-              Last 15{renderSortIndicator('overUnderCount')}
+            <th className="sortable" style={{ cursor: 'pointer' }} onClick={() => handleSort('overUnderCount15')}>
+              Last 15{renderSortIndicator('overUnderCount15')}
             </th>
             <th className="sortable" style={{ cursor: 'pointer' }} onClick={() => handleSort('overUnderCountH2H')}>
               H2H (3){renderSortIndicator('overUnderCountH2H')}
@@ -468,14 +370,14 @@ export default function CheatSheet({
               <td>{p.player_name}</td>
               <td>
                 <img
-                  src={getTeamLogo(p.team_abbreviation)}
+                  src={getTeamLogo(p.team_abbreviation, p)}
                   alt={p.team_abbreviation}
                   width={30}
                 />
               </td>
               <td>
                 <img
-                  src={getTeamLogo(p.opponent)}
+                  src={getTeamLogo(p.opponent, p)}
                   alt={p.opponent}
                   width={30}
                 />
@@ -484,22 +386,22 @@ export default function CheatSheet({
               <td>{p.feature}</td>
               <td>
                 {p.overUnderCount5
-                  ? renderOverUnderCell(p.overUnderCount5, 5)
+                  ? renderOverUnderCell(p.overUnderCount5, p.l5Length)
                   : 'N/A'}
               </td>
               <td>
                 {p.overUnderCount10
-                  ? renderOverUnderCell(p.overUnderCount10, 10)
+                  ? renderOverUnderCell(p.overUnderCount10, p.l10Length)
                   : 'N/A'}
               </td>
               <td>
-                {p.overUnderCount
-                  ? renderOverUnderCell(p.overUnderCount, 15)
+                {p.overUnderCount15
+                  ? renderOverUnderCell(p.overUnderCount15, p.l15Length)
                   : 'N/A'}
               </td>
               <td>
                 {p.overUnderCountH2H
-                  ? renderOverUnderCell(p.overUnderCountH2H, 3)
+                  ? renderOverUnderCell(p.overUnderCountH2H, p.h2hLength)
                   : 'N/A'}
               </td>
               <td>
